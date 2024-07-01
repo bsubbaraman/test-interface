@@ -67,7 +67,7 @@
         <div id="error-log"></div>
       </div>
       <div class="right-content">
-        <iframe id="preview" src="./editor/js/views/preview.html"></iframe>
+        <iframe id="preview" src="./examples/preview.html"></iframe>
       </div>
       <div class="pane-manager">
       </div>
