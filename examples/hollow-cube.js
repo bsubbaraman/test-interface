@@ -1,6 +1,6 @@
 export const exampleSketch = `function setup() {
-    createCanvas(windowWidth, windowHeight, WEBGL);
-    fab = createFab();
+  createCanvas(windowWidth, windowHeight, WEBGL);
+  fab = createFab();
 }
 
 function fabDraw() {
