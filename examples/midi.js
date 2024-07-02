@@ -1,6 +1,5 @@
 
-export const midiEx = `
-function setup() {
+export const midiEx = `function setup() {
   createCanvas(windowWidth, windowHeight, WEBGL);
   midiController = createMidiController(debug=true);
 }

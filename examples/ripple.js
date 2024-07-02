@@ -25,8 +25,6 @@ function fabDraw() {
   let idx = 0;
   let phaseOffset = 0;
   for (let z = startHeight; z <= h; z += layerHeight) {
-    //     let phaseOffset = (idx % 2 == 0) ? 0 : PI / 2;
-    console.log(phaseOffset);
     idx += 1;
     // front
     for (let i = x; i <= x + sideLength; i += 1) {
@@ -69,6 +67,16 @@ function fabDraw() {
   }
 
   fab.presentPart();
+}
+
+function midiSetup() {
+  // map midi values!
+}
+
+function midiDraw(moveCommand) {
+  // do things with your midi values
+
+  return moveCommand;
 }
 
 function draw() {

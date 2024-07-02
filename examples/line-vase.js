@@ -48,6 +48,16 @@ function fabDraw() {
   fab.presentPart(); // pop the bed out. 
 }
 
+function midiSetup() {
+  // map midi values!
+}
+
+function midiDraw(moveCommand) {
+  // do things with your midi values
+
+  return moveCommand;
+}
+
 function draw() {
   background(255);
   fab.render();

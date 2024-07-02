@@ -23,13 +23,23 @@ function fabDraw() {
     let y = r * sin(angle);
 
     if (angle == 0) {
-      fab.moveRetract(center.x + x, center.y + y, z, 3 * speed);
+      fab.moveRetract(center.x + x, center.y + y, z, speed);
     } else {
       fab.moveExtrude(center.x + x, center.y + y, z, speed);
     }
     r -= 0.1;
   }
   fab.presentPart();
+}
+
+function midiSetup() {
+  // map midi values!
+}
+
+function midiDraw(moveCommand) {
+  // do things with your midi values
+
+  return moveCommand;
 }
 
 function draw() {
