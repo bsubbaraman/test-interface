@@ -1,6 +1,6 @@
 function setup() {
   createCanvas(windowWidth, windowHeight, WEBGL);
-  fab = createFab();
+  // fab = createFab();
 }
 
 function fabDraw() {
