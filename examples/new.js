@@ -1,29 +1,29 @@
 function setup() {
-    createCanvas(windowWidth, windowHeight, WEBGL);
-    midiController = createMidiController(debug = true);
+  createCanvas(windowWidth, windowHeight, WEBGL);
+  midiController = createMidiController(debug=true);
 }
 
 function fabDraw() {
-    fab.setERelative();
-    fab.fanOff();
-    fab.autoHome();
-    fab.setTemps(205, 55); // wait for nozzle & bed to heat up
+  fab.setERelative();
+  fab.fanOff();
+  fab.autoHome();
+  fab.setTemps(205, 55); // wait for nozzle & bed to heat up
 
-    // your artifact here!
+  // your artifact here!
 
 }
 
 function draw() {
-    background(255);
-    fab.render();
+  background(255);
+  fab.render();
 }
 
 function midiSetup() {
-    // map midi values!
+  // map midi values!
 }
 
 function midiDraw(moveCommand) {
-    // do things with your midi values
+  // do things with your midi values
 
-    return moveCommand;
+  return moveCommand;
 }

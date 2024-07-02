@@ -50,7 +50,7 @@
             <i @click="${()=>hi("2point5D-sketching")}">2.5D sketching</i>
             <i @click="${()=>hi("ripple")}">ripple texture</i>
             <i @click="${()=>hi("nonplanar")}">non-planar vase</i>
-            <!-- <i @click="${()=>hi("midi")}">midi</i> -->
+            <i @click="${()=>hi("midiEx")}">midi</i>
           </div>
         </div>
       </div>
