@@ -1,6 +1,6 @@
 function setup() {
   createCanvas(windowWidth, windowHeight, WEBGL);
-  fab = createFab();
+  midiController = createMidiController(debug=true);
 }
 
 function fabDraw() {
@@ -8,7 +8,6 @@ function fabDraw() {
   fab.setERelative(); // put extruder in relative mode, independent of other axes
   fab.autoHome();
   fab.setTemps(205, 60); // (nozzle, bed) °C - you should use a temperature best suited for your filament!
-  fab.introLine(0.2); // draw to lines on the left side of the print bed
 
   let r = 25;
   let startHeight = 0.4;

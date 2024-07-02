@@ -1,6 +1,6 @@
 function setup() {
   createCanvas(windowWidth, windowHeight, WEBGL);
-  fab = createFab();
+  midiController = createMidiController(debug=true);
 }
 
 function fabDraw() {
@@ -10,7 +10,6 @@ function fabDraw() {
   fab.fanOff();
   fab.autoHome();
   fab.setTemps(205, 55); // wait for nozzle & bed to heat up
-  fab.introLine(); // line back and forth to clean nozzle
     
   /* design your artifact here!
    *  here's a vase line vase, based on LIA's 'Filament Sculptures' 

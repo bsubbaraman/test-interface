@@ -22,7 +22,13 @@ function fabDraw() {
   fab.moveRetract(x, y, layerHeight); // move to the start (x,y,z) position without extruding
 
   for (let z = layerHeight; z <= sideLength; z += layerHeight) { 
-    z == layerHeight ? speed = 10 : speed = 20; // go slow on the first layer
+    // slow down for the first layer
+    if (z == layerHeight) {
+      speed = 10;
+    }
+    else {
+      speed = 20;
+    }
     fab.moveExtrude(x + sideLength, y, z, speed);               // move along the bottom side while extruding filament
     fab.moveExtrude(x + sideLength, y + sideLength, z, speed);  // right side
     fab.moveExtrude(x, y + sideLength, z, speed);               // top side

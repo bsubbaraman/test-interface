@@ -1,6 +1,6 @@
 function setup() {
   createCanvas(windowWidth, windowHeight, WEBGL);
-  // fab = createFab();
+  midiController = createMidiController(debug=true);
 }
 
 function fabDraw() {
@@ -9,7 +9,6 @@ function fabDraw() {
   fab.setERelative();
   fab.autoHome();
   fab.setTemps(205, 60); // (nozzle, bed)
-  fab.introLine();
 
   // make a spiral!
   let r = 80; // outer radius
