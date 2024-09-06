@@ -1,6 +1,5 @@
 function setup() {
   createCanvas(windowWidth, windowHeight, WEBGL);
-  midiController = createMidiController(debug=true);
 }
 
 function fabDraw() {
