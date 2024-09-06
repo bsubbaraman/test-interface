@@ -130,7 +130,7 @@ window.parent.postMessage({ type: "error", body: e.toString() });
     </div>
 `,Dv=i=>zt`
     <div class="midi-content">
-      <p><b>MIDI</b></p>
+      <p><b>MIDI Info</b></p>
       <div class="menu-item" id="button" @click="${Av}">connect</div>
       <p id="midi-connection-status">
         ${i.midiDeviceAvailable&&i.midiConnectionEstablished?"Connected":"Not Connected"}
