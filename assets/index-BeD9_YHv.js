@@ -67,7 +67,7 @@ window.parent.postMessage({ type: "error", body: e.toString() });
         <div class="iframe-holder">
           <iframe id="preview" src="./examples/preview.html"></iframe>
         </div>
-       ${Wv(i)}
+       <!--${Wv(i)}-->
        ${Dv(i)}
       </div
     </div>
@@ -103,6 +103,7 @@ window.parent.postMessage({ type: "error", body: e.toString() });
     </div>
 `,Iv=i=>zt`
     <div class="machine-settings">
+      <p><b>machine</b></p>
       <div class="menu-item" id="button" @click="${Cv}">connect</div>
       <div class="menu-item" id="button" @click="${_v}">start print</div>
       <div class="menu-item" id="button" @click="${Mv}">stop print</div>
@@ -114,7 +115,7 @@ window.parent.postMessage({ type: "error", body: e.toString() });
               </div>
             </div>
       <p>Connection Status: <span id="connection-status">${i.fabDeviceConnected?"Connected":"Not Connected"}</span> </p>
-      ${i.fabConfig?zt`
+      <!--${i.fabConfig?zt`
         <details>
         <summary>Printer details</summary>
         <ul>
@@ -124,11 +125,12 @@ window.parent.postMessage({ type: "error", body: e.toString() });
           <li> nozzle diameter: ${i.fabConfig.nozzleDiameter} </li>
           <li> filament diameter: ${i.fabConfig.filamentDiameter} </li>
         </ul>
-        </details>`:""}
+        </details> -->`:""}
      
     </div>
 `,Dv=i=>zt`
     <div class="midi-content">
+      <p><b>MIDI</b></p>
       <div class="menu-item" id="button" @click="${Av}">connect</div>
       <p id="midi-connection-status">
         ${i.midiDeviceAvailable&&i.midiConnectionEstablished?"Connected":"Not Connected"}
@@ -255,4 +257,4 @@ function draw() {
   background(255);
   fab.render();
 }
-`;function Uv(){Ji(ls(te),document.getElementById("root"));var i=Io(["#left","#right"],{sizes:[70,30],minSize:5,gutterSize:15}),e=Io([".code-editor",".machine-settings"],{direction:"vertical",sizes:[80,20],minSize:5,gutterSize:15,onDragStart:function(){s(".code-editor"),s(".machine-settings")},onDragEnd:function(){n(".code-editor"),n(".machine-settings")}}),t=Io([".iframe-holder",".video-settings",".midi-content"],{direction:"vertical",sizes:[60,20,20],minSize:5,gutterSize:15,onDragStart:function(){s(".iframe-holder"),s(".midi-content"),s(".video-settings")},onDragEnd:function(){n(".iframe-holder"),n(".midi-content"),n(".video-settings")}});function s(l){var h=document.querySelector(l);h.classList.add("dragged")}function n(l){var h=document.querySelector(l);h.classList.remove("dragged")}var r={horizontalSplit:i,leftVerticalSplit:e,rightVerticalSplit:t};te.paneManager=r;const o=document.querySelector(".code-editor");te.codemirror=wv(o),te.sketchWindow=document.getElementById("preview").contentWindow,Ji(ls(te),document.getElementById("root")),Xv(te),Vv(te);const a=window.localStorage.getItem("p5.fab");te.codemirror.view.dispatch({changes:{from:0,insert:a??qv}})}window.addEventListener("load",async()=>{window.self==window.top&&Uv()});
+`;function Uv(){Ji(ls(te),document.getElementById("root"));var i=Io(["#left","#right"],{sizes:[70,30],minSize:5,gutterSize:15}),e=Io([".code-editor",".machine-settings"],{direction:"vertical",sizes:[75,25],minSize:5,gutterSize:15,onDragStart:function(){s(".code-editor"),s(".machine-settings")},onDragEnd:function(){n(".code-editor"),n(".machine-settings")}}),t=Io([".iframe-holder",".midi-content"],{direction:"vertical",sizes:[60,20,20],minSize:5,gutterSize:15,onDragStart:function(){s(".iframe-holder"),s(".midi-content")},onDragEnd:function(){n(".iframe-holder"),n(".midi-content")}});function s(l){var h=document.querySelector(l);h.classList.add("dragged")}function n(l){var h=document.querySelector(l);h.classList.remove("dragged")}var r={horizontalSplit:i,leftVerticalSplit:e,rightVerticalSplit:t};te.paneManager=r;const o=document.querySelector(".code-editor");te.codemirror=wv(o),te.sketchWindow=document.getElementById("preview").contentWindow,Ji(ls(te),document.getElementById("root")),Xv(te),Vv(te);const a=window.localStorage.getItem("p5.fab");te.codemirror.view.dispatch({changes:{from:0,insert:a??qv}})}window.addEventListener("load",async()=>{window.self==window.top&&Uv()});
