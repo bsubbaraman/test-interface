@@ -4,10 +4,10 @@ function setup() {
 
 function fabDraw() {
   // setup!
-  fab.setAbsolutePosition();  // set all axes (x/y/z/extruder) to absolute
-  fab.setERelative();         // put extruder in relative mode, independent of other axes
   fab.autoHome();
-  fab.setTemps(205, 60);      // (nozzle, bed) °C - you should use a temperature best suited for your filament!
+  fab.setTemps(205, 60);
+
+  fab.introLine();
   
   // variables for our cube
   let sideLength = 20; //mm
@@ -24,7 +24,7 @@ function fabDraw() {
       speed = 10;
     }
     else {
-      speed = 20;
+      speed = 25;
     }
     fab.moveExtrude(x + sideLength, y, z, speed);               // move along the bottom side while extruding filament
     fab.moveExtrude(x + sideLength, y + sideLength, z, speed);  // right side
@@ -37,22 +37,21 @@ function fabDraw() {
 
 function midiSetup(midiData) {
   // in midiSetup, we can specify the actions we want to happen on incoming note values
-  // to figure out notes for your midi controller, use debug=true in createMidiController
-  // and open up your console (cmd + option + i)
-  // in the incoming midi data, the 'note' is the unique id for the button/knob/etc you're using
-  // and the velocity will be a value between 0 and 127
+  // open up the midi info pane to see the incoming data
+  // the 'note' is the unique id for the button/knob/etc you're using
+  // and the 'value' will be a numver between 0 and 127
 
   if (midiData.note == 16) { 
     // for any incoming value, we can name the property we want to change in midiDraw
-    midiController.speed = midiData.mapVelocity(100, 3000); // values in mm/min
+    midiController.speed = midiData.mapValue(10, 60); // values in mm/sec
   }
 
-  if (midiData.note == 20) {
-    midiController.extrusionMultiplier =  midiData.mapVelocity(0.5, 5);
+  if (midiData.note == 17) {
+    midiController.extrusionMultiplier =  midiData.mapValue(0.5, 2);
   }
 
-  if (midiData.note == 24) {
-    midiController.zOff =  midiData.mapVelocity(0, 15);
+  if (midiData.note == 18) {
+    midiController.zOff =  midiData.mapValue(0, 15);
   }
 }
 
@@ -63,7 +62,8 @@ function midiDraw(moveCommand) {
 
   if (midiController.speed) {
     // set the speed to the midicontroller value
-    moveCommand.f = midiController.speed;
+    // the GCode will use mm/min
+    moveCommand.f = mm_sec_to_mm_min(midiController.speed);
   }
 
   if (midiController.extrusionMultiplier) {
