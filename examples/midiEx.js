@@ -63,7 +63,7 @@ function midiDraw(moveCommand) {
   if (midiController.speed) {
     // set the speed to the midicontroller value
     // the GCode will use mm/min
-    moveCommand.f = mm_sec_to_mm_min(midiController.speed);
+    moveCommand.f = mmPerMin(midiController.speed);
   }
 
   if (midiController.extrusionMultiplier) {

@@ -13,11 +13,11 @@ function fabDraw() {
   fab.introLine(0.2); // draw to lines on the left side of the print bed
   
   // variables for our hollow cube!
-  let sideLength = 20; //mm
-  let x = fab.centerX - sideLength/2; 
-  let y = fab.centerY - sideLength/2;
+  const sideLength = 20; //mm
+  const x = fab.centerX - sideLength/2; 
+  const y = fab.centerY - sideLength/2;
   let speed = 10; // mm/sec
-  let layerHeight = 0.2; // mm
+  const layerHeight = 0.2; // mm
 
   // design our hollow cube!
   fab.moveRetract(x, y, layerHeight); // move to the start (x,y,z) position without extruding
