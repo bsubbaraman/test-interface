@@ -11,6 +11,7 @@ import { startPrint } from "../events/startPrint";
 import { stopPrint } from "../events/stopPrint";
 import { evaluateJs, updatePreview } from "../repl";
 import { setPrinter } from "../events/setPrinter";
+import { homeMachine } from "../events/interactiveMachine";
 
 
 export function view(state) {
@@ -69,6 +70,18 @@ const topMenu = state => html`
     </div>
 `;
 
+
+const notConnectedView = state => html`
+<p>
+  Connection Status: <span id="connection-status">Not Connected</span> 
+</p>
+`
+
+const connectedView = state => html`
+<p>Connection Status: <span id="connection-status">Connected</span> </p>
+<button @click=${homeMachine}>Home</button>
+`
+
 const machineSettings = state => html`
     <div class="machine-settings">
       <p><b>machine</b></p>
@@ -82,7 +95,7 @@ const machineSettings = state => html`
                 <i @click="${() => setPrinter(state, 'q5')}">FLSun Q5</i>
               </div>
             </div>
-      <p>Connection Status: <span id="connection-status">${state.fabDeviceConnected ? "Connected" : "Not Connected"}</span> </p>
+      ${state.fabDeviceConnected ? connectedView() : notConnectedView()}
       <!--${state.fabConfig ? html`
         <details>
         <summary>Printer details</summary>
