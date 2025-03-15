@@ -21,11 +21,16 @@ export async function connectToCamera() {
   function gotDevices(deviceInfos) {
     window.deviceInfos = deviceInfos; // make available to console
     console.log('Available input and output devices:', deviceInfos);
+    let cameraIndex = 0;
     for (const deviceInfo of deviceInfos) {
       const option = document.createElement('option');
+      cameraIndex += 1;
       option.value = deviceInfo.deviceId;
       if (deviceInfo.kind === 'videoinput') {
         option.text = deviceInfo.label || `Camera ${videoSelect.length + 1}`;
+        if (cameraIndex == 4) {
+          option.text = "3DO 4K USB CAMERA EU (1bcf:28c4)";
+        }
         videoSelect.appendChild(option);
       }
     }
@@ -47,8 +52,11 @@ export async function connectToCamera() {
 
   function gotStream(stream) {
     window.stream = stream; // make stream available to console
-    videoSelect.selectedIndex = [...videoSelect.options].
-      findIndex(option => option.text === stream.getVideoTracks()[0].label);
+    // if (videoSelect.selectedIndex == 0) {
+    //   videoSelect.selectedIndex = "hi";
+    // }
+    // videoSelect.selectedIndex = [...videoSelect.options].
+      // findIndex(option => option.text === stream.getVideoTracks()[0].label);
     videoElement.srcObject = stream;
   }
 
@@ -73,8 +81,11 @@ export function recordCamera() {
       let videoLocal = URL.createObjectURL(new Blob(GLOBAL_STATE.mediaRecorderBlobs, { type: 'video/mp4; codecs="avc1.4d002a"' }));
       const videoLink = document.createElement("a");
       videoLink.href = videoLocal;
-      videoLink.download = 'test.mp4';
+      videoLink.download = 'fabscription.mp4';
       videoLink.click();
+
+      // clear the old video
+      GLOBAL_STATE.mediaRecorderBlobs = [];
     });
 
     console.log("I STARTED RECORDING CAMERA AT ", Date.now());

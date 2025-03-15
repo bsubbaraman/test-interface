@@ -16,4 +16,5 @@ export const GLOBAL_STATE = {
   fabConfig: undefined,
   mediaRecorder: null,
   mediaRecorderBlobs: [],
+  mappedMidiData: {},
 }

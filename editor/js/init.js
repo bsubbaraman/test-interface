@@ -7,10 +7,17 @@ import { setupMessages } from "./setupMessages.js";
 import Split from "split.js";
 import { initCodeMirror } from "./editor.js";
 import { exampleSketch } from "../../examples/hollow-cube.js";
+import { exampleFoam } from "../../examples/jerry-foam.js";
 import { midiEx } from "../../examples/midi.js";
 
 export function init() {
   render(view(GLOBAL_STATE), document.getElementById("root"));
+  
+  if (!navigator.serial) {
+    alert(
+      "🚨 Your browser doesn't seem to support the Web Serial API, which is required for p5.fab to be able to connect to machines. You can still use this editor to write code, but for full functionality, use Chrome or Edge version 89 or above."
+    );
+  }
 
   // Setup split panes
   var horizontalSplit = Split(['#left', '#right'], {
@@ -21,7 +28,7 @@ export function init() {
 
   var leftVerticalSplit = Split(['.code-editor', '.machine-settings'], {
     direction: 'vertical',
-    sizes: [75, 25],
+    sizes: [93, 7],
     minSize: 5,
     gutterSize: 15,
     onDragStart: function () {
@@ -34,20 +41,20 @@ export function init() {
      }
   });
 
-  var rightVerticalSplit = Split(['.iframe-holder', '.midi-content'], {
+  var rightVerticalSplit = Split(['.iframe-holder', '.video-settings', '.midi-content'], {
     direction: 'vertical',
-    sizes: [60, 20, 20],
+    sizes: [100, 0, 0],
     minSize: 5,
     gutterSize: 15,
     onDragStart: function () {
       addDragClass('.iframe-holder');
       addDragClass('.midi-content');
-      // addDragClass('.video-settings');
+      addDragClass('.video-settings');
     },
     onDragEnd: function () {
       removeDragClass('.iframe-holder');
       removeDragClass('.midi-content');
-      // removeDragClass('.video-settings');
+      removeDragClass('.video-settings');
      }
   });
 
@@ -82,6 +89,6 @@ export function init() {
   // TODO: local storage
   const saved = window.localStorage.getItem("p5.fab");
   GLOBAL_STATE.codemirror.view.dispatch({
-    changes: { from: 0, insert: saved ?? midiEx } // change back to exampleSketch once midi is integrated
+    changes: { from: 0, insert: saved ?? exampleFoam} // change back to exampleSketch after Jerry/Jubilee tests
   });
 }

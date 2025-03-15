@@ -6,7 +6,6 @@ import { syntaxTree, indentUnit } from "@codemirror/language";
 import {acceptCompletion, completionStatus} from "@codemirror/autocomplete"
 import { indentWithTab, indentMore, indentLess } from "@codemirror/commands";
 
-
 export function initCodeMirror(el) {
   const keybindings = keymap.of([
     {

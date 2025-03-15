@@ -1,4 +1,4 @@
-export const exampleSketch = `function setup() {
+function setup() {
   createCanvas(windowWidth, windowHeight, WEBGL);
 }
 
@@ -6,11 +6,11 @@ function fabDraw() {
   // setup
   fab.autoHome();
   fab.setTemps(205, 60);                // (nozzle, bed) °C, use temps best suited for your filament!
-  
+
   // variables for our hollow cube!
   const sideLength = 20;                // mm
-  const x = fab.centerX - sideLength/2; 
-  const y = fab.centerY - sideLength/2;
+  const x = fab.centerX - sideLength / 2;
+  const y = fab.centerY - sideLength / 2;
   const startHeight = 0.2               // mm
   const layerHeight = 0.2;              // mm
   let speed = 10;                       // mm/sec
@@ -20,7 +20,7 @@ function fabDraw() {
   // design our hollow cube!
   fab.moveRetract(x, y, startHeight);   // move to the start (x,y,z) position without extruding
 
-  for (let z = layerHeight; z <= sideLength; z += layerHeight) { 
+  for (let z = layerHeight; z <= sideLength; z += layerHeight) {
     if (z == startHeight) {             // if it's the first layer
       speed = 10;                       // slow print speeed down for the first layer
     }
@@ -39,4 +39,4 @@ function fabDraw() {
 function draw() {
   background(255);
   fab.render();
-}`
+}

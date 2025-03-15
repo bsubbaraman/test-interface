@@ -31,7 +31,12 @@ export function updatePreview(state, rerunSetup = false) {
     // is there a better way to do this...?
     // inject try/catch loops here by iterating through the ast
     try {
-        var ast = Parser.parse(code, { ecmaVersion: 2020 });
+        try {
+            var ast = Parser.parse(code, { ecmaVersion: 2020 });
+        }
+        catch (e) {
+            window.parent.postMessage({ type: "error", body: e.toString() })
+        }
         var codeToEval = ''
         var nodeBody = '';
         for (const n in ast['body']) {
@@ -43,6 +48,9 @@ export function updatePreview(state, rerunSetup = false) {
                 // post errors to be handled in setupMessages.js
                 nodeBody = functionDeclaration + '\ntry {\n' + functionBody + '\n}\ncatch (e){\nwindow.parent.postMessage({ type: "error", body: e.toString() });\n}\n}\n'
             }
+            // else { // for code written outside of functions
+            //     nodeBody = '\ntry {\n' + nodeBody + '\n}\ncatch (e){\nwindow.parent.postMessage({ type: "error", body: e.toString() });\n}\n'
+            // }
             codeToEval += nodeBody
         }
 
@@ -55,7 +63,7 @@ export function updatePreview(state, rerunSetup = false) {
             var newp5 = `new p5()`;
             state.fabInit = true;
 
-            // post log values to displa most recent gcode sent in web interface
+            // post log values to display most recent gcode sent in web interface
             var forwardLog = `const originalLog = console.log;
                 console.log = (...args) => {
                 parent.window.postMessage({ type: 'log', args: args }, '*')

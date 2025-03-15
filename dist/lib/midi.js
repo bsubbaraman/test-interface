@@ -18,11 +18,13 @@ class MidiData {
     this.channel = parseFloat(data[0] & 0xf)
     this.type = parseFloat(data[0] & 0xf0)
     this.note = parseFloat(data[1])
-    this.velocity = parseFloat(data[2])
+    this.value = parseFloat(data[2]) // using 'value' instead of 'velocity' to avoid confusion with speed
+    this.NOTEON = 144;
+    this.NOTEOFF = 128;
   }
 
   mapValue(start, end) {
-    return round(map(this.velocity, 0, 127, start, end), 2);
+    return round(map(this.value, 0, 127, start, end), 2);
   }
 }
 
@@ -86,13 +88,10 @@ class MidiController {
     console.log(messageLabel, messageBody);
   }
 
-
-
   MidiTypes = {
     NOTEON: 144, // button down
     NOTEOFF: 127, // button up
   }
-  
 }
 
 

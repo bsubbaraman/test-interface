@@ -11,6 +11,7 @@ import { startPrint } from "../events/startPrint";
 import { stopPrint } from "../events/stopPrint";
 import { evaluateJs, updatePreview } from "../repl";
 import { setPrinter } from "../events/setPrinter";
+// import { _midiController } from "../../../lib/midi";
 
 
 export function view(state) {
@@ -29,7 +30,7 @@ export function view(state) {
         <div class="iframe-holder">
           <iframe id="preview" src="./examples/preview.html"></iframe>
         </div>
-       <!--${videoSettings(state)}-->
+       ${videoSettings(state)}
        ${midiSettings(state)}
       </div
     </div>
@@ -47,11 +48,13 @@ const topMenu = state => html`
             <input id="file-upload" type="file" />
             <div class="menu-item-icon"><i class="fa-solid fa-book"></i>
               <div class="menu-item-dropdown-content">
-                <i @click="${() => setExample('line-vase')}">line vase</i>
+                <i @click="${() => setExample('cube')}">cube</i>
                 <i @click="${() => setExample('2point5D-sketching')}">2.5D sketching</i>
+                <i @click="${() => setExample('line-vase')}">line vase</i>
+                <i @click="${() => setExample('midiEx')}">interactive cube</i>
+                <i @click="${() => setExample('etch-a-sketch')}">etch-a-sketch</i>
                 <i @click="${() => setExample('ripple')}">ripple texture</i>
                 <i @click="${() => setExample('nonplanar')}">non-planar vase</i>
-                <i @click="${() => setExample('midiEx')}">midi</i>
               </div>
             </div>
           </div>
@@ -71,7 +74,7 @@ const topMenu = state => html`
 
 const machineSettings = state => html`
     <div class="machine-settings">
-      <p><b>machine</b></p>
+    <h3 class="panel-header"> Machine </h3>
       <div class="menu-item" id="button" @click="${connectToMachine}">connect</div>
       <div class="menu-item" id="button" @click="${startPrint}">start print</div>
       <div class="menu-item" id="button" @click="${stopPrint}">stop print</div>
@@ -83,8 +86,8 @@ const machineSettings = state => html`
               </div>
             </div>
       <p>Connection Status: <span id="connection-status">${state.fabDeviceConnected ? "Connected" : "Not Connected"}</span> </p>
-      <!--${state.fabConfig ? html`
-        <details>
+      ${state.fabConfig ? html`
+        <!-- <details>
         <summary>Printer details</summary>
         <ul>
           <li> maxX: ${state.fabConfig.maxX} </li>
@@ -101,26 +104,27 @@ const machineSettings = state => html`
 
 const midiSettings = state => html`
     <div class="midi-content">
-      <p><b>MIDI</b></p>
+      <h3 class="panel-header"> MIDI </h3>
       <div class="menu-item" id="button" @click="${connectToMidi}">connect</div>
       <p id="midi-connection-status">
-        ${state.midiDeviceAvailable && state.midiConnectionEstablished ? "Connected" : "Not Connected"}
+        ${state.midiDeviceAvailable && state.midiConnectionEstablished ? "Status: Connected" : "Status: Not Connected"}
       </p>
-      <p id="midi-data">
-        ${state.midiData !== "" && state.midiDeviceAvailable && state.midiConnectionEstablished ? html`<div id="midi-data">
-          <ul>
-            <li>Note: ${state.midiData.note}</li>
-            <li>Velocity: ${state.midiData.velocity}</li>
-            <li>Type: ${state.midiData.type}</li>
-          </ul>
-        </div>`
-    : ""}        
+ <p id="midi-data">
+        ${state.midiData !== "" && state.midiDeviceAvailable && state.midiConnectionEstablished ? html`<div id="midi-incoming-data">
+            Note:  ${state.midiData.note} <br>
+            Value: ${state.midiData.value} <br>
+            Type: ${state.midiData.type} <br>
+            ${Object.keys(state.mappedMidiData).map(propt => html`
+              ${propt}: ${state.mappedMidiData[propt]} <br>
+            `)}
+        </div>` : ""}        
       </p>
     </div>
 `;
 
 const videoSettings = state => html`
     <div class="video-settings">
+    <h3 class="panel-header"> Video </h3>
       <div class="menu-item" id="button" @click="${connectToCamera}">connect</div>
       <br><br>
   ${!state.cameraConnected ? "" : 

@@ -33,6 +33,9 @@ export function setupMessages(state) {
                     case "MIDI_DATA":                   // when midi data arrives
                         state.midiData = messageData.midiData;
                         break;
+                    case "MAPPED_MIDI_DATA":          // mapped values
+                        state.mappedMidiData = messageData.test;
+                        break;
                     case "FAB_CONNECTION_CHANGE":       // when connect/disconnect to webserial device
                         state.fabDeviceConnected = messageData.connected;
                         break;
@@ -43,7 +46,7 @@ export function setupMessages(state) {
                         state.fabConfig[messageData.property] = messageData.value;
                         break;
                     default:
-                        console.log(message);
+                        // console.log(message);
                         break;
                 }
                 render(view(state), document.getElementById("root"));

@@ -1,13 +1,8 @@
 function setup() {
   createCanvas(windowWidth, windowHeight, WEBGL);
-  midiController = createMidiController(debug=true);
 }
 
 function fabDraw() {
-  // setup printing variables
-  // this is a standard setup block:
-  fab.setERelative();
-  fab.fanOff();
   fab.autoHome();
   fab.setTemps(205, 55); // wait for nozzle & bed to heat up
     
@@ -48,13 +43,12 @@ function fabDraw() {
   fab.presentPart(); // pop the bed out. 
 }
 
-function midiSetup() {
-  // map midi values!
+function midiSetup(midiData) {
+
 }
 
 function midiDraw(moveCommand) {
-  // do things with your midi values
-
+  
   return moveCommand;
 }
 

@@ -1,22 +1,19 @@
 function setup() {
   createCanvas(windowWidth, windowHeight, WEBGL);
-  midiController = createMidiController(debug=true);
 }
 
 function fabDraw() {
   // setup!
-  fab.setAbsolutePosition();
-  fab.setERelative();
   fab.autoHome();
-  fab.setTemps(205, 60); // (nozzle, bed)
+  fab.setTemps(205, 60);
 
   // make a spiral!
-  let r = 80; // outer radius
-  let numSpirals = 8; // how many concentric spirals to make
-  let center = createVector(fab.centerX, fab.centerY); // center the spiral on the print bed
+  let r = 80;                                           // outer radius
+  let numSpirals = 8;                                   // how many concentric spirals to make
+  let center = createVector(fab.centerX, fab.centerY);  // center the spiral on the print bed
   let z = 0.2;
   let step = TWO_PI / 100;
-  let speed = 20; // move slowly for adhesion
+  let speed = 20;                                       // move slowly for adhesion
 
   for (let angle = 0; angle <= numSpirals * TWO_PI; angle += step) {
     let x = r * cos(angle);
@@ -32,8 +29,8 @@ function fabDraw() {
   fab.presentPart();
 }
 
-function midiSetup() {
-  // map midi values!
+function midiSetup(midiData) {
+
 }
 
 function midiDraw(moveCommand) {
@@ -43,7 +40,6 @@ function midiDraw(moveCommand) {
 }
 
 function draw() {
-  orbitControl(2, 2, 0.1);
   background(255);
   fab.render();
 }

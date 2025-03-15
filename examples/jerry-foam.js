@@ -1,4 +1,4 @@
-function setup() {
+export const exampleFoam = `function setup() {
   createCanvas(windowWidth, windowHeight, WEBGL);
 }
 
@@ -18,4 +18,4 @@ function midiDraw(moveCommand) {
 function draw() {
   background(255);
   fab.render();
-}
+}`;

@@ -45,15 +45,15 @@ function midiSetup(midiData) {
 
   if (midiData.note == 16) { 
     // for any incoming value, we can name the property we want to change in midiDraw
-    midiController.speed = midiData.mapVelocity(100, 3000); // values in mm/min
+    midiController.speed = midiData.mapValue(100, 3000); // values in mm/min
   }
 
   if (midiData.note == 20) {
-    midiController.extrusionMultiplier =  midiData.mapVelocity(0.5, 5);
+    midiController.extrusionMultiplier =  midiData.mapValue(0.5, 5);
   }
 
   if (midiData.note == 24) {
-    midiController.zOff =  midiData.mapVelocity(0, 15);
+    midiController.zOff =  midiData.mapValue(0, 15);
   }
 }
 

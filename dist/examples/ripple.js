@@ -1,13 +1,10 @@
 function setup() {
   createCanvas(windowWidth, windowHeight, WEBGL);
-  midiController = createMidiController(debug=true);
 }
 
 function fabDraw() {
-  fab.setAbsolutePosition(); // set all axes (x.y/z/extruder) to absolute
-  fab.setERelative(); // put extruder in relative mode, independent of other axes
   fab.autoHome();
-  fab.setTemps(205, 60); // (nozzle, bed) °C - you should use a temperature best suited for your filament!
+  fab.setTemps(205, 60); 
 
   let r = 25;
   let startHeight = 0.4;
@@ -69,7 +66,7 @@ function fabDraw() {
   fab.presentPart();
 }
 
-function midiSetup() {
+function midiSetup(midiData) {
   // map midi values!
 }
 
